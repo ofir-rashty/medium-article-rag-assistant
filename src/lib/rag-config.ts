@@ -2,7 +2,7 @@
 export const RAG_CONFIG = {
   chunk_size: 512,
   overlap_ratio: 0.17,
-  top_k: 8,
+  top_k: 12,
 } as const;
 
 /** Same model name as Colab (instructor proxy on api.llmod.ai) */
