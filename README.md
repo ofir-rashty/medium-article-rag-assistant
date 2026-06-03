@@ -22,7 +22,7 @@ Vectors were ingested in **Google Colab** (Pinecone); this repo is only the Next
 |-----------|-------|
 | `chunk_size` | 512 (words) |
 | `overlap_ratio` | 0.17 |
-| `top_k` | 8 |
+| `top_k` | 12 |
 
 ## Tech stack
 
