@@ -1,0 +1,33 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# build
+/.next/
+/out/
+/build
+
+# env & secrets
+.env
+.env.local
+.env.*.local
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# misc
+.DS_Store
+*.pem
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# ingestion (Colab only — not in repo)
+.ingest-cache.json
+medium-english-50mb.csv
+*.csv

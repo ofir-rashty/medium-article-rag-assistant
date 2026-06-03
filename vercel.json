@@ -1,0 +1,10 @@
+{
+  "env": {
+    "OPENAI_BASE_URL": "https://api.llmod.ai"
+  },
+  "functions": {
+    "src/app/api/prompt/route.ts": {
+      "maxDuration": 60
+    }
+  }
+}
