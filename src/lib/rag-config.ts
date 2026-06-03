@@ -9,4 +9,4 @@ export const RAG_CONFIG = {
 export const EMBEDDING_MODEL =
   process.env.EMBEDDING_MODEL ?? "4UHRUIN-text-embedding-3-small";
 export const EMBEDDING_DIMENSIONS = 1536;
-export const CHAT_MODEL = process.env.CHAT_MODEL ?? "gpt-5-mini";
+export const CHAT_MODEL = process.env.CHAT_MODEL ?? "4UHRUIN-gpt-5-mini";
