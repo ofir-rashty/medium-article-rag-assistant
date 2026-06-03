@@ -9,6 +9,7 @@ import { queryVectors } from "./pinecone-client";
 export type ContextChunk = {
   article_id: string;
   title: string;
+  authors: string;
   chunk: string;
   score: number;
 };
@@ -35,7 +36,7 @@ function formatContextForPrompt(chunks: ContextChunk[]): string {
   return chunks
     .map(
       (c, i) =>
-        `[${i + 1}] article_id=${c.article_id} | title=${c.title} | score=${c.score.toFixed(4)}\n${c.chunk}`
+        `[${i + 1}] article_id=${c.article_id} | title=${c.title} | authors=${c.authors} | score=${c.score.toFixed(4)}\n${c.chunk}`
     )
     .join("\n\n");
 }
@@ -59,6 +60,7 @@ export async function answerQuestion(question: string): Promise<PromptResult> {
   let context: ContextChunk[] = matches.map((m) => ({
     article_id: metaString(m.metadata, "article_id"),
     title: metaString(m.metadata, "title"),
+    authors: metaString(m.metadata, "authors"),
     chunk: metaString(m.metadata, "chunk"),
     score: m.score,
   }));
