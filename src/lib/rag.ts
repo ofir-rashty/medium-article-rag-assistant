@@ -65,12 +65,6 @@ export async function answerQuestion(question: string): Promise<PromptResult> {
     score: m.score,
   }));
 
-  const listMatch = question.match(/\b(\d+)\s+articles?\b/i);
-  if (listMatch) {
-    const n = Math.min(parseInt(listMatch[1], 10), 3);
-    context = dedupeByArticle(context, n);
-  }
-
   const contextBlock = formatContextForPrompt(context);
   const system = MEDIUM_ASSISTANT_SYSTEM_PROMPT;
   const user = buildUserPrompt(question, contextBlock);
