@@ -10,5 +10,14 @@ ${contextBlock}
 
 Question: ${question}
 
-Answer clearly. When listing articles, respect any count limits in the question. Cite titles and authors from the context when relevant.`;
+Answer clearly. When listing articles, respect any count limits in the question. Cite titles and authors from the context when relevant.`
+
+Format your reply exactly as:
+
+ANSWER:
+<the direct answer to the question — e.g. titles only if asked>
+
+EXPLANATION:
+<why this answer follows from the retrieved context; quote or paraphrase passages>;
+  
 }
