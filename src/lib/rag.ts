@@ -14,9 +14,11 @@ export type ContextChunk = {
   score: number;
 };
 
+type PublicContextChunk = Omit<ContextChunk, "authors">;
+
 export type PromptResult = {
   response: string;
-  context: ContextChunk[];
+  context: PublicContextChunk[];
   Augmented_prompt: {
     System: string;
     User: string;
@@ -70,12 +72,17 @@ export async function answerQuestion(question: string): Promise<PromptResult> {
   const user = buildUserPrompt(question, contextBlock);
   const response = await chatCompletion(system, user);
 
+  const publicContext: PublicContextChunk[] = fullContext.map(
+    ({ authors, ...rest }) => rest
+  );
+
   return {
     response,
-    context,
+    context: publicContext,
     Augmented_prompt: {
       System: system,
       User: user,
     },
   };
 }
+
