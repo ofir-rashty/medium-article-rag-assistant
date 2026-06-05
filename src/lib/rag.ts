@@ -38,12 +38,17 @@ function formatContextForPrompt(chunks: ContextChunk[]): string {
   return chunks
     .map(
       (c, i) =>
-        `[${i + 1}] article_id=${c.article_id} | title=${c.title} | authors=${c.authors} | score=${c.score.toFixed(4)}\n${c.chunk}`
+        `[${i + 1}] article_id=${c.article_id} | title=${c.title} | authors=${c.authors} | score=${c.score.toFixed(
+          4
+        )}\n${c.chunk}`
     )
     .join("\n\n");
 }
 
-function dedupeByArticle(chunks: ContextChunk[], maxArticles?: number): ContextChunk[] {
+function dedupeByArticle(
+  chunks: ContextChunk[],
+  maxArticles?: number
+): ContextChunk[] {
   const seen = new Set<string>();
   const out: ContextChunk[] = [];
   for (const c of chunks) {
@@ -55,11 +60,14 @@ function dedupeByArticle(chunks: ContextChunk[], maxArticles?: number): ContextC
   return out;
 }
 
-export async function answerQuestion(question: string): Promise<PromptResult> {
+export async function answerQuestion(
+  question: string
+): Promise<PromptResult> {
   const [queryEmbedding] = await embedTexts([question]);
   const matches = await queryVectors(queryEmbedding, RAG_CONFIG.top_k);
 
-  let context: ContextChunk[] = matches.map((m) => ({
+  // הקשר מלא – כולל authors, לשימוש בפרומפט
+  const fullContext: ContextChunk[] = matches.map((m) => ({
     article_id: metaString(m.metadata, "article_id"),
     title: metaString(m.metadata, "title"),
     authors: metaString(m.metadata, "authors"),
@@ -67,7 +75,7 @@ export async function answerQuestion(question: string): Promise<PromptResult> {
     score: m.score,
   }));
 
-  const contextBlock = formatContextForPrompt(context);
+  const contextBlock = formatContextForPrompt(fullContext);
   const system = MEDIUM_ASSISTANT_SYSTEM_PROMPT;
   const user = buildUserPrompt(question, contextBlock);
   const response = await chatCompletion(system, user);
@@ -85,4 +93,3 @@ export async function answerQuestion(question: string): Promise<PromptResult> {
     },
   };
 }
-
