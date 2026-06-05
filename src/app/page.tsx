@@ -122,6 +122,18 @@ export default function Home() {
           >
             {JSON.stringify(result.context, null, 2)}
           </pre>
+          <h3>Augmented prompt</h3>
+          <pre
+            style={{
+              background: "#f4f4f4",
+              padding: 12,
+              borderRadius: 8,
+              fontSize: 12,
+              overflow: "auto",
+            }}
+          >
+            {JSON.stringify(result.Augmented_prompt, null, 2)}
+          </pre>
         </section>
       )}
     </main>
